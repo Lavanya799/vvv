@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine's Day Surprise</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(circle at top, #1b1b2f, #0f0f1a);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+  }
+
+  /* soft glowing particles */
+  .glow {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: rgba(255, 77, 109, 0.8);
+    border-radius: 50%;
+    animation: float 10s linear infinite;
+  }
+
+  @keyframes float {
+    0% { bottom: -10px; opacity: 0; }
+    50% { opacity: 0.8; }
+    100% { bottom: 110%; opacity: 0; }
+  }
+
+  .card {
+    background: #161625;
+    padding: 45px;
+    border-radius: 25px;
+    width: 380px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(255, 77, 109, 0.5);
+    animation: pop 1s ease;
+    transition: all 0.6s ease;
+    z-index: 2;
+  }
+
+  @keyframes pop {
+    from { transform: scale(0.85); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  h1 {
+    color: #ff4d6d;
+    text-shadow: 0 0 12px rgba(255, 77, 109, 0.7);
+  }
+
+  p {
+    color: #ddd;
+    font-size: 17px;
+  }
+
+  .buttons {
+    margin-top: 30px;
+    position: relative;
+    height: 90px;
+  }
+
+  button {
+    padding: 14px 26px;
+    font-size: 16px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  #yes {
+    background: linear-gradient(135deg, #ff4d6d, #ff758c);
+    color: white;
+    box-shadow: 0 0 18px rgba(255, 77, 109, 0.7);
+  }
+
+  #yes:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(255, 77, 109, 1);
+  }
+
+  #no {
+    background: #2e2e3f;
+    color: #bbb;
+    position: absolute;
+    left: 120px;
+  }
+
+  #please {
+    margin-top: 15px;
+    font-size: 22px;
+    display: none;
+    animation: wiggle 0.6s infinite;
+  }
+
+  @keyframes wiggle {
+    0% { transform: rotate(-6deg); }
+    50% { transform: rotate(6deg); }
+    100% { transform: rotate(-6deg); }
+  }
+
+  /* Success screen */
+  .success {
+    display: none;
+    text-align: center;
+    animation: fadeIn 1s ease forwards;
+  }
+
+  .success img {
+    width: 260px;
+    border-radius: 20px;
+    margin-top: 20px;
+    box-shadow: 0 0 30px rgba(255, 77, 109, 0.7);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+  }
+</style>
+</head>
+<body>
+
+<script>
+  for (let i = 0; i < 25; i++) {
+    let glow = document.createElement("div");
+    glow.className = "glow";
+    glow.style.left = Math.random() * 100 + "vw";
+    glow.style.animationDuration = (6 + Math.random() * 6) + "s";
+    document.body.appendChild(glow);
+  }
+</script>
+
+<div class="card" id="card">
+  <h1>Will You Be My Valentine?  🙈</h1>
+
+  <div class="buttons">
+    <button id="yes">Yes 😍</button>
+    <button id="no">No 🙄</button>
+  </div>
+</div>
+
+<div class="success" id="success">
+  <h1>WE DID IT 💕✨</h1>
+  <p>You officially own my heart now 🥹💘</p>
+  <img src="https://i.pinimg.com/originals/73/e7/e0/73e7e01d9d4971edc2ab1e39d85c2c92.gif" alt="Love GIF">
+</div>
+
+<script>
+  const noBtn = document.getElementById("no");
+  const pleaseText = document.getElementById("please");
+  const yesBtn = document.getElementById("yes");
+  const card = document.getElementById("card");
+  const success = document.getElementById("success");
+
+  noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * 220 - 110;
+    const y = Math.random() * 90 - 45;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    pleaseText.style.display = "block";
+  });
+
+  yesBtn.addEventListener("click", () => {
+    card.style.opacity = "0";
+    card.style.transform = "scale(0.7)";
+    setTimeout(() => {
+      card.style.display = "none";
+      success.style.display = "block";
+    }, 600);
+  });
+</script>
+
+</body>
+</html>
